@@ -1,47 +1,24 @@
-const { map, values } = require("ramda")
+setImmediate(() => console.log("this is set immediate 1"))
+setImmediate(() => console.log("this is set immediate 2"))
+setImmediate(() => console.log("this is set immediate 3"))
 
-Array.inspect = function() {
-  return this.map(inspect)
-}
+setTimeout(() => console.log("this is set timeout 1"), 0)
+setTimeout(() => {
+  console.log("this is set timeout 2")
+  process.nextTick(() =>
+    console.log("this is process.nextTick added inside setTimeout")
+  )
+}, 0)
+setTimeout(() => console.log("this is set timeout 3"), 0)
+setTimeout(() => console.log("this is set timeout 4"), 0)
+setTimeout(() => console.log("this is set timeout 5"), 0)
 
-const USERS = {
-  1: { id: 1, name: "bob", hobby: "basketball" },
-  2: { id: 2, name: "jim" },
-  3: { id: 3, name: "nick" },
-}
-
-const inspect = x => (x.inspect ? x.inspect() : x)
-
-const head = ([first]) => (first ? Maybe(first) : Nothing)
-
-const Maybe = x => ({
-  map: f => Maybe(f(x)),
-  bind: f => f(x),
-  inspect: () => `Maybe(${inspect(x)})`,
+process.nextTick(() => console.log("this is process.nextTick 1"))
+process.nextTick(() => {
+  process.nextTick(
+    console.log.bind(console, "this is the inner next tick inside next tick")
+  )
 })
-
-Maybe.of = x => Maybe(x)
-
-const Nothing = {
-  map: f => Nothing,
-  bind: f => Nothing,
-  inspect: () => `Nothing`,
-}
-
-const fetchUser = id =>
-  Promise.resolve(USERS[id] ? Maybe.of(USERS[id]) : Nothing)
-
-const fetchUsers = () => Promise.resolve(values(USERS))
-
-const prop = propName => obj =>
-  obj[propName] ? Maybe.of(obj[propName]) : Nothing
-
-const getUserHobby = prop("hobby")
-
-const fetchUserHobby = id => fetchUser(id).then()
-
-fetchUsers()
-  .then(head)
-  .then(firstUser => firstUser.bind(getUserHobby))
-  .then(console.log)
-  .catch(console.log)
+process.nextTick(() => console.log("this is process.nextTick 2"))
+process.nextTick(() => console.log("this is process.nextTick 3"))
+process.nextTick(() => console.log("this is process.nextTick 4"))

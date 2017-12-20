@@ -25,6 +25,10 @@ import ReduxUIDemo from "./ReduxUIDemo/ReduxUIDemo"
 import ReduxUIRemake from "./ReduxUIDemo/ReduxUIRemake"
 // import ReduxUIRemake from "./ReduxUIDemo/ReduxUIRemakeRealLib"
 
+import RxJSAnimation from "RxJSAnimation/RxJSAnimation"
+
+import StateMonad from "StateMonad/StateMonad"
+
 import "./ImmutableDemo.js/RamdaDemo"
 
 @connect(state => ({ state }))
@@ -35,7 +39,7 @@ export default class Root extends Component {
         <div
           style={{ border: "1px solid black", padding: "25px", width: "50%" }}
         >
-          <ReduxUIRemake />
+          <StateMonad />
         </div>
         <div
           style={{ border: "1px solid black", padding: "25px", width: "50%" }}

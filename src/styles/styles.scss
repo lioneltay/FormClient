@@ -111,3 +111,20 @@ $time: 0.5s;
   margin-top: 5px;
   padding: 5px;
 }
+
+.ball {
+  background: blue;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+}
+
+.clock-hand {
+  // background: black;
+  width: 0;
+  height: 0;
+  border-bottom: 200px solid black;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+}

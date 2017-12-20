@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "crocks": "^0.8.1",
+    "eyes": "^0.1.8",
     "immutable": "^3.8.2",
     "invariant": "^2.2.2",
     "prop-types": "^15.6.0",
