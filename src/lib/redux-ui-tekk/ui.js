@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import * as R from "ramda"
+import { pure } from "recompose"
 
 import { mountComponent, unmountComponent, updateState } from "./actions"
 import { getAccessibleState, getStateAtPath } from "./helpers"
@@ -22,6 +23,8 @@ const callIfFunc = R.curry(
 
 const ui = ({ key, initialState = {}, selector } = {}) => Comp => {
   const generatedKey = key || generateKey(Comp)
+
+  const EnhancedComp = pure(Comp)
 
   @connect(
     state => ({
@@ -99,14 +102,15 @@ const ui = ({ key, initialState = {}, selector } = {}) => Comp => {
     }
 
     render() {
+      const { uiState, ...rest } = this.props
       const stateInitialised = !!getStateAtPath(
         this.props.uiState,
         this.componentPath
       )
 
       return !stateInitialised ? null : (
-        <Comp
-          {...this.props}
+        <EnhancedComp
+          {...rest}
           {...this.getState()}
           updateState={this.updateState}
         />

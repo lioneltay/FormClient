@@ -6,7 +6,13 @@ import * as R from "ramda"
 const updateStateAtPath = (uiState, path, values) => {
   const localState = getStateAtPath(uiState, path)
   const { localValues } = splitValues(localState, values)
-  const newLocalState = R.merge(localState, localValues)
+  // const newLocalState = R.merge(localState, localValues)
+  const newLocalState = R.mapObjIndexed((v, k) => {
+    const newValue = localValues[k]
+    return newValue === undefined
+      ? v
+      : typeof newValue === "function" ? newValue(v) : newValue
+  }, localState)
   return R.assocPath(R.append("state", path), newLocalState, uiState)
 }
 

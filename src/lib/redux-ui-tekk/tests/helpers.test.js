@@ -153,6 +153,45 @@ test("Updates a nested state tree", () => {
   expect(updateStateTree(uiState, path, values)).toEqual(correctNextState)
 })
 
+test("updateStateTree: Supports updater functions (prevValuee) => nextValue", () => {
+  const uiState = {
+    RootComponent: {
+      state: {
+        rootProp: "rootPropValue",
+      },
+      ChildComponent1: {
+        state: {
+          child1Prop: "child1PropValue",
+          child2Prop: "child2PropValue",
+        },
+      },
+    },
+  }
+
+  const path = ["RootComponent", "ChildComponent1"]
+
+  const values = {
+    child1Prop: "Updated_child1PropValue",
+    rootProp: prev => `Updated_${prev}`,
+  }
+
+  const correctNextState = {
+    RootComponent: {
+      state: {
+        rootProp: "Updated_rootPropValue",
+      },
+      ChildComponent1: {
+        state: {
+          child1Prop: "Updated_child1PropValue",
+          child2Prop: "child2PropValue",
+        },
+      },
+    },
+  }
+
+  expect(updateStateTree(uiState, path, values)).toEqual(correctNextState)
+})
+
 test("getAccesibleState: Child access parent state", () => {
   const uiState = {
     RootComponent: {
