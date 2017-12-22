@@ -32,3 +32,8 @@ We can write tests for this section since they are all pure functions
 
 * [ ] Investigate how to give each component a redux API interface to define and react to custom actions, will need to replace reducer?
 * Can do this by using a store enhancer which upgrades the store the keep a reference to its current reducer?
+
+### TESTS
+
+* [ ] updateState should update keys that are the same (immutable js will fix this)
+* [ ] updateState allows updatefunctions prev => state
