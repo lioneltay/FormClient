@@ -3,7 +3,7 @@ import { withHandlers, compose, withProps, onlyUpdateForKeys } from "recompose"
 import * as R from "ramda"
 import { connect } from "react-redux"
 
-import { ui } from "lib/redux-ui"
+import { ui } from "lib/redux-ui-tekk"
 
 const callIfFunc = (candidate, ...args) =>
   typeof candidate === "function" ? candidate(...args) : candidate
@@ -17,12 +17,21 @@ const logOnRender = label => Comp =>
   }
 
 const InformedComponent = compose(
-  ui(),
-  withProps(({ ui: { items, selectedItemId, itemClicks, previewClicks } }) => ({
-    itemClicks: itemClicks,
-    previewClicks: previewClicks,
-    selectedItem: items.find(R.propEq("id", selectedItemId)),
-  })),
+  ui({
+    selector: state => ({
+      items: state.items,
+      selectedItemId: state.selectedItemId,
+      itemClicks: state.itemClicks,
+      previewClicks: state.previewClicks,
+    }),
+  }),
+  withProps(({ items, selectedItemId, itemClicks, previewClicks }) => {
+    return {
+      itemClicks: itemClicks,
+      previewClicks: previewClicks,
+      selectedItem: items.find(R.propEq("id", selectedItemId)),
+    }
+  }),
   logOnRender("InformedComponent")
 )(({ selectedItem, itemClicks, previewClicks, uiKey, uiPath }) => (
   <div>
@@ -50,12 +59,16 @@ const lastId = R.pipe(R.last, R.unless(R.isNil, R.prop("id")))
 const firstId = R.pipe(R.head, R.unless(R.isNil, R.prop("id")))
 
 const ActionButtons = compose(
-  ui(),
+  ui({
+    selector: state => ({
+      items: state.items,
+    }),
+  }),
   withHandlers({
-    selectFirst: ({ updateState, ui }) => () =>
-      updateState({ selectedItemId: firstId(ui.items) }),
-    selectLast: ({ updateState, ui }) => () =>
-      updateState({ selectedItemId: lastId(ui.items) }),
+    selectFirst: ({ updateState, items }) => () =>
+      updateState({ selectedItemId: firstId(items) }),
+    selectLast: ({ updateState, items }) => () =>
+      updateState({ selectedItemId: lastId(items) }),
   }),
   logOnRender("ActionButtons"),
   connect()
@@ -113,10 +126,14 @@ const ItemListView = ({ items, onItemClick }) => (
 )
 
 const ItemList = compose(
-  ui(),
+  ui({
+    selector: state => ({
+      itemClicks: state.itemClicks,
+    }),
+  }),
   withHandlers({
-    onItemClick: ({ updateState, ui }) => id =>
-      updateState({ selectedItemId: id, itemClicks: ui.itemClicks + 1 }),
+    onItemClick: ({ updateState, itemClicks }) => id =>
+      updateState({ selectedItemId: id, itemClicks: itemClicks + 1 }),
   }),
   logOnRender("ItemList")
 )(ItemListView)
@@ -128,10 +145,14 @@ const LogClicks = ({ onClick }) => Comp => props => (
 )
 
 const Preview = compose(
-  ui(),
+  ui({
+    selector: state => ({
+      previewClicks: state.previewClicks,
+    }),
+  }),
   LogClicks({
-    onClick: ({ updateState, ui }) => () =>
-      updateState({ previewClicks: ui.previewClicks + 1 }),
+    onClick: ({ updateState, previewClicks }) => () =>
+      updateState({ previewClicks: previewClicks + 1 }),
   }),
   onlyUpdateForKeys(["item"]),
   logOnRender("Preview")
@@ -153,50 +174,38 @@ const Modal = compose(
     initialState: {
       open: false,
     },
-    // reducer: (state, action) => {
-    //   console.log("custom!!!!!!", state, action)
-    //   switch (action.type) {
-    //     case "OPEN_MODAL": {
-    //       return R.assoc("open", true, state)
-    //     }
-    //     case "CLOSE_MODAL": {
-    //       return R.assoc("open", false, state)
-    //     }
-    //     default: {
-    //       return state
-    //     }
-    //   }
-    // },
+    selector: state => ({
+      open: state.open,
+    }),
   })
-)(({ ui: { open } }) => (
+)(({ open }) => (
   <div>
     <div>Modal {open ? "open" : "closed"}</div>
   </div>
 ))
 
 const OrgDashboardFeature = compose(
-  connect(state => ({ items: state.items })),
+  connect(state => ({ items: console.log("farts") || state.items })),
   ui({
-    initialState: {
+    initialState: ({ items }) => ({
       showMessage: false,
-      items: ({ items }) => items,
+      items,
       itemClicks: 0,
       previewClicks: 0,
-      selectedItemId: ({ items }) => (items.length !== 0 ? items[0].id : null),
+      selectedItemId: items.length !== 0 ? items[0].id : null,
       filters: {
         gender: "all",
         otherField: "value!!!",
       },
-    },
+    }),
+    selector: R.pick(["items", "selectedItemId", "filters"]),
   }),
-  withProps(
-    ({ updateState, ui: { items, selectedItemId, filters: { gender } } }) => ({
-      items: items.filter(item => item.gender === gender || gender === "all"),
-      selectedItem: findById(selectedItemId, items),
-    })
-  ),
+  withProps(({ items, selectedItemId, filters: { gender } }) => ({
+    items: items.filter(item => item.gender === gender || gender === "all"),
+    selectedItem: findById(selectedItemId, items),
+  })),
   logOnRender("OrgDashboardFeature")
-)(({ ui, items, selectedItem, updateState }) => {
+)(({ items, selectedItem, filters, updateState }) => {
   return (
     <div>
       <Modal />
@@ -208,7 +217,7 @@ const OrgDashboardFeature = compose(
       <div className="card">
         <ActionButtons
           onGenderChange={gender =>
-            updateState(R.assocPath(["filters", "gender"], gender, ui))
+            updateState({ filters: R.assoc("gender", gender, filters) })
           }
         />
       </div>
@@ -226,6 +235,11 @@ const OrgDashboardFeature = compose(
   )
 })
 
-const ReduxStateDemo3 = () => <OrgDashboardFeature />
+const ReduxStateDemo3 = () => (
+  <div>
+    <h1>LALALA</h1>
+    <OrgDashboardFeature />
+  </div>
+)
 
 export default ReduxStateDemo3

@@ -1,5 +1,5 @@
-import * as R from "ramda"
-import { UPDATE_STATE, MOUNT_STATE, UNMOUNT_STATE } from "./actions"
+import { UPDATE_STATE, MOUNT_COMPONENT, UNMOUNT_COMPONENT } from "./actions"
+import { updateStateTree, removeStateAtPath, addStateAtPath } from "./helpers"
 
 const initialState = {}
 
@@ -8,18 +8,16 @@ const reducer = (state = initialState, action) => {
 
   switch (action.type) {
     case UPDATE_STATE: {
-      const { statePath, value } = action.payload
-      const currentState = R.path(statePath.concat("state"), state)
-      const newState = R.merge(currentState, value)
-      return R.assocPath(statePath.concat("state"), newState, state)
+      const { componentPath, state: componentState } = action.payload
+      return updateStateTree(state, componentPath, componentState)
     }
-    case MOUNT_STATE: {
-      const { statePath, value } = action.payload
-      return R.assocPath(statePath.concat("state"), value, state)
+    case MOUNT_COMPONENT: {
+      const { componentPath, state: componentState } = action.payload
+      return addStateAtPath(state, componentPath, componentState)
     }
-    case UNMOUNT_STATE: {
-      const { statePath } = action.payload
-      return R.dissocPath(statePath.concat("state"), state)
+    case UNMOUNT_COMPONENT: {
+      const { componentPath } = action.payload
+      return removeStateAtPath(state, componentPath)
     }
     default: {
       return state

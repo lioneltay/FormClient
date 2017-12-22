@@ -9,8 +9,7 @@ import { Provider } from "react-redux"
 
 import { reducer as formReducer } from "redux-form"
 import { reducer as reduxStateReducer } from "lib/redux-state"
-// import { reducer as uiReducer } from "redux-ui"
-import { reducer as uiReducer, dynamicUIReducers } from "lib/redux-ui"
+import { reducer as uiReducer, dynamicUIReducers } from "lib/redux-ui-tekk"
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -26,6 +25,7 @@ const itemsReducer = state => state || ITEMS
 
 const reducer = combineReducers({
   otherState: (state = { otherState: "otherValues" }) => state,
+  anything: (state, action) => action.anything || null,
   reduxForm: formReducer,
   reduxState: reduxStateReducer,
   ui: uiReducer,
