@@ -1,3 +1,3 @@
-####Light Weight Starter Code
+# js-starter
 
-Light weight starter code for testing things
+Basic setup and file structure for a simple react app written in javascript.
