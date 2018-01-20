@@ -1,0 +1,12 @@
+.header {
+  background: teal;
+}
+
+.header-link {
+  color: white;
+  margin-right: 10px;
+}
+
+.header-logo {
+  color: white;
+}

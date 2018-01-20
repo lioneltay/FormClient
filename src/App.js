@@ -1,23 +1,21 @@
 import * as React from "react"
 import { connect } from "react-redux"
 
+import { Header } from "containers"
+import Root from "pages"
+
+import { BrowserRouter, Route } from "react-router-dom"
+
 @connect(state => ({ state }))
-export default class Root extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
-      <div style={{ display: "flex" }}>
-        <div
-          style={{ border: "1px solid black", padding: "25px", width: "50%" }}
-        >
-          <h3>App Component</h3>
+      <BrowserRouter>
+        <div>
+          <Header />
+          <Root />
         </div>
-        <div
-          style={{ border: "1px solid black", padding: "25px", width: "50%" }}
-        >
-          <h3>Store State</h3>
-          <pre>{JSON.stringify(this.props.state, null, 2)}</pre>
-        </div>
-      </div>
+      </BrowserRouter>
     )
   }
 }

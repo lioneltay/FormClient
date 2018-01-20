@@ -1,3 +1,10 @@
+@import url("./position.css");
+@import url("./spacing.css");
+
+* {
+  box-sizing: border-box;
+}
+
 .tabs {
   border: 1px solid black;
 }

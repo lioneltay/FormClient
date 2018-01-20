@@ -1,0 +1,9 @@
+.fj-sb {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fa-c {
+  display: flex;
+  align-items: center;
+}
