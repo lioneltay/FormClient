@@ -6,15 +6,26 @@ import Root from "pages"
 
 import { BrowserRouter, Route } from "react-router-dom"
 
-@connect(state => ({ state }))
+import { ApolloProvider } from "react-apollo"
+import graphqlClient from "services/graphql-client"
+
+import { getCurrentUser } from "store/modules/auth/actions"
+
+@connect(state => ({}), { getCurrentUser })
 export default class App extends React.Component {
+  componentWillMount() {
+    this.props.getCurrentUser()
+  }
+
   render() {
     return (
       <BrowserRouter>
-        <div>
-          <Header />
-          <Root />
-        </div>
+        <ApolloProvider client={graphqlClient}>
+          <div>
+            <Header />
+            <Route component={Root} />
+          </div>
+        </ApolloProvider>
       </BrowserRouter>
     )
   }

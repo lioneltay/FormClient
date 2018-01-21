@@ -5,7 +5,7 @@ import { Provider } from "react-redux"
 import App from "App"
 import "styles/styles.scss"
 
-import createStore from "boot/createStore"
+import createStore from "store/createStore"
 
 const store = createStore()
 
