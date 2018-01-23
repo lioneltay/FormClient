@@ -2,7 +2,7 @@ import * as React from "react"
 import "./styles.css"
 import { connect } from "react-redux"
 import { logout } from "store/modules/auth/actions"
-import { loggedIn } from "store/modules/auth/selectors"
+import { loggedIn, loading } from "store/modules/auth/selectors"
 
 import { Link } from "react-router-dom"
 
@@ -11,9 +11,10 @@ const { Fragment } = React
 const Header = connect(
   state => ({
     loggedIn: loggedIn(state),
+    loading: loading(state),
   }),
   { logout }
-)(({ loggedIn, logout }) => {
+)(({ loggedIn, logout, loading }) => {
   return (
     <div className="header fj-sb fa-c p-2">
       <div>
@@ -23,7 +24,7 @@ const Header = connect(
       </div>
 
       <div>
-        {loggedIn ? (
+        {loading ? null : loggedIn ? (
           <Link className="header-link" to="/logout" onClick={logout}>
             Logout
           </Link>

@@ -11,7 +11,7 @@ import graphqlClient from "services/graphql-client"
 
 import { getCurrentUser } from "store/modules/auth/actions"
 
-@connect(state => ({}), { getCurrentUser })
+@connect(null, { getCurrentUser })
 export default class App extends React.Component {
   componentWillMount() {
     this.props.getCurrentUser()
@@ -21,7 +21,7 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         <ApolloProvider client={graphqlClient}>
-          <div>
+          <div className="container">
             <Header />
             <Route component={Root} />
           </div>
