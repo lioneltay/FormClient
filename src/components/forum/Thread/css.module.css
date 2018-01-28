@@ -1,0 +1,19 @@
+.thread-item {
+  padding: 15px 25px;
+}
+
+.thread-item:hover {
+  transition: 0.5s;
+  border-color: navy;
+}
+
+.author {
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,23 @@
+.flex {
+  display: flex;
+}
+
+.fj-c {
+  display: flex;
+  justify-content: center;
+}
+
+.fj-sb {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fj-s {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.fj-e {
+  display: flex;
+  justify-content: flex-end;
+}

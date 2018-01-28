@@ -10,6 +10,9 @@ import { ApolloProvider } from "react-apollo"
 import graphqlClient from "services/graphql-client"
 
 import { getCurrentUser } from "store/modules/auth/actions"
+import { Snackbar } from "components/global"
+
+const Fragment = React.Fragment
 
 @connect(null, { getCurrentUser })
 export default class App extends React.Component {
@@ -21,10 +24,14 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         <ApolloProvider client={graphqlClient}>
-          <div className="container">
+          <Fragment>
+            <Snackbar />
+
             <Header />
-            <Route component={Root} />
-          </div>
+            <div className="container">
+              <Route component={Root} />
+            </div>
+          </Fragment>
         </ApolloProvider>
       </BrowserRouter>
     )

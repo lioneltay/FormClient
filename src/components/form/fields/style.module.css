@@ -1,0 +1,41 @@
+.container {
+}
+
+.container-horizontal {
+  display: flex;
+  align-items: center;
+}
+
+.inputContainer {
+  box-sizing: border-box;
+  line-height: 1.5;
+  height: 2.22em;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+  color: #555;
+  border: #ccc 1px solid;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  padding: 0 0.857em;
+}
+
+.input::placeholder {
+  color: #bbb;
+  font-style: italic;
+}
+
+.label {
+  font-size: 0.9rem;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-weight: 500;
+}
+
+.error {
+  color: tomato;
+  font-weight: 500;
+}

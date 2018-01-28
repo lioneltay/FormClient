@@ -24,14 +24,40 @@ const settings = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
       },
+      // {
+      //   use: [
+      //     "style-loader",
+      //     {
+      //       loader: "css-loader",
+      //       query: {
+      //         modules: true,
+      //         localIdentName: "[name]__[local]___[hash:base64:5]",
+      //       },
+      //     },
+      //   ],
+      //   test: /^local.*\.css$/,
+      // },
+      // {
+      //   use: ["style-loader", "css-loader"],
+      //   test: /^(?!^local).*\.css$/,
+      //   // test: /^local\-style\.css$/,
+      // },
       {
-        use: "ts-loader",
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
+        test: /^(?!.*?\.module).*\.css$/,
+        use: ["style-loader", "css-loader"],
       },
       {
-        use: ["style-loader", "css-loader"],
-        test: /\.css$/,
+        test: /\.module\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              localIdentName: "[name]__[local]___[hash:base64:5]",
+            },
+          },
+        ],
       },
     ],
   },

@@ -1,5 +1,5 @@
 export const asyncTypes = type => ({
-  PENDING: `${type}_PENDING`,
-  SUCCESS: `${type}_SUCCESS`,
-  FAILURE: `${type}_FAILURE`,
+  REQUEST: `${type}/REQUEST`,
+  SUCCESS: `${type}/SUCCESS`,
+  FAILURE: `${type}/FAILURE`,
 })

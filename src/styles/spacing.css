@@ -5,3 +5,19 @@
 .p-2 {
   padding: 15px;
 }
+
+.p-3 {
+  padding: 40px;
+}
+
+.mt-1 {
+  margin-top: 5px;
+}
+
+.mt-2 {
+  margin-top: 15px;
+}
+
+.mt-3 {
+  margin-top: 40px;
+}

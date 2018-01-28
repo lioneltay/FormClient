@@ -1,0 +1,24 @@
+.snackbar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin: auto;
+
+  color: white;
+  padding: 15px;
+
+  background: #181818;
+  transition: 0.3s;
+  min-width: 150px;
+
+  text-align: center;
+}
+
+.snackbar.show {
+  transform: translate(-50%, 0);
+}
+
+.snackbar.hide {
+  transform: translate(-50%, 100%);
+}

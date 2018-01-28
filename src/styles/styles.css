@@ -1,6 +1,14 @@
 @import url("./position.css");
 @import url("./spacing.css");
+@import url("./flex.css");
+@import url("./interaction.css");
+@import url("./components.css");
 
 * {
   box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: #f8f8f8;
 }

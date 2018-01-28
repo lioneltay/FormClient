@@ -8,6 +8,8 @@ import Login from "./login"
 import Logout from "./logout"
 import Protected from "./protected"
 import Posts from "./posts"
+import Users from "./users"
+import Threads from "./threads"
 
 const Root = connect(state => ({
   state,
@@ -21,6 +23,8 @@ const Root = connect(state => ({
         <Route path="/logout" component={Logout} />
         <Route path="/protected" component={Protected} />
         <Route path="/posts" component={Posts} />
+        <Route path="/users" component={Users} />
+        <Route path="/threads" component={Threads} />
         <Route render={() => <Redirect to="/home" />} />
       </Switch>
 

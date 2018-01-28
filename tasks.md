@@ -22,6 +22,39 @@ server/database
 * [ ] add join monster to object syntax version
 * [ ] add join monster to schema language version
 
+models
+
+* [ ] relationships (follower/followee)
+* [ ] likes
+* [ ] give user first_name and last_name and use these to compute full_name using sqlDeps
+
+features
+
+* [x] should be able to sign up
+* [x] login in
+* [x] log out
+* [x] create thread
+* [ ] replies
+
+  * [ ] reply to thread should open an editor below the thread
+  * [ ] reply to commnet should open an editor below the comment
+
+* [ ] add actions below comment / thread, reply, like, ...
+
+  * [ ] collapsable comment chains
+
+* [ ] comment on thread
+* [ ] comment on comments
+* [ ] view user profile
+* [ ] edit user profile
+* [ ] archive comment (hides the comment contents)
+* [ ] archive thread (does not show up on front page or searches)
+* [ ] search for threads
+* [ ] search for users
+* [ ] like threads and posts
+* [ ] pagination
+  * [ ] Threads, Users, Comments
+
 ui
 
 * [ ] use grid layout
@@ -54,13 +87,17 @@ ui
   * [ ] Web notifications, someone has responded to your Post/Thread (Refer to web apis notes)
   * [ ] Push notifications, someone has responded to your Post/Thread (Refer to web apis notes)
 
-* [ ] use join-monster to speed up queries
+* [x] use join-monster to speed up queries
   * [x] dataloader doesn't seem like it can handle conditional queries or relational queries, it is only good at loading by given ids
   * [x] Re-write schema using Object definitions
     * [x] Handle circular dependencies of types
-* [ ] investigate the affects of loading nested comments
+* [x] investigate the affects of loading nested comments
 
 * [ ] UI
   * [ ] Create Thread
   * [ ] View All Threads
   * [ ] Create Post
+
+JOIN MONSTER BENEFITS
+
+* add derived data easily

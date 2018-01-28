@@ -6,8 +6,12 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
+  // if (!/^@@/.test(action.type)) {
+  //   console.log("\nACTION", action)
+  // }
+
   switch (action.type) {
-    case LOGIN.PENDING: {
+    case LOGIN.REQUEST: {
       return R.assoc("loading", true, state)
     }
     case LOGIN.FAILURE: {
@@ -17,7 +21,7 @@ export default (state = initialState, action) => {
       return R.merge(state, { loading: false, user: action.payload.user })
     }
 
-    case LOGOUT.PENDING: {
+    case LOGOUT.REQUEST: {
       return R.assoc("loading", true, state)
     }
     case LOGOUT.FAILURE: {
@@ -27,7 +31,7 @@ export default (state = initialState, action) => {
       return R.merge(state, { loading: false, user: null })
     }
 
-    case GET_CURRENT_USER.PENDING: {
+    case GET_CURRENT_USER.REQUEST: {
       return R.assoc("loading", true, state)
     }
     case GET_CURRENT_USER.FAILURE: {
