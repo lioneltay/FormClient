@@ -1,6 +1,27 @@
+## Bugs
+
+* [ ] rootComments of thread returns every comment since every comment has a thread id
+  * [ ] add a sql constraint that only allows one of comment_id or thread_id to be null, the other must not be null
+    * [x] Not neccessary, a root comment is a comment that has no parent comment (null comment_id)
+  * [ ] learn about sql constraints in general
+
+## Optimisations
+
+* [ ] fetching comments 1 by one generates too many api requests provide different ways of fetching comments
+
+  * [ ] Go by comment level instead, still many requests, but less. Multiple requests are convenient in this case since we use recursive rendering.
+    * [ ] Comments component, requests subcomments
+  * [ ] Go by entire comments
+
+* [ ] hoist state into redux store so that ui is a function of state.
+  * [ ] Comments should not even render subcomments if toggled, no need to render hidden components just to manage state
+    * NEVER make anti-semantic decisions just to satisfy conditions (rendering elements with display none is so counter intuitive)
+
 ## Tasks
 
-@@@@ Weekend (Reddit Clone)
+mysql
+
+* [ ] store dates in iso format
 
 planning
 
@@ -18,15 +39,15 @@ server/database
 * [ ] mysql: how to rename a table or column
 * [ ] mysql: how to remove or add rows and columns
 * [x] implement authentication using salt and hash, jwt and cookies, bcrypt
-* [ ] rewrite the graphql schema using the object syntax.
-* [ ] add join monster to object syntax version
-* [ ] add join monster to schema language version
+* [x] rewrite the graphql schema using the object syntax.
+* [x] add join monster to object syntax version
+* [x] add join monster to schema language version
 
 models
 
-* [ ] relationships (follower/followee)
-* [ ] likes
-* [ ] give user first_name and last_name and use these to compute full_name using sqlDeps
+* [x] relationships (follower/followee)
+* [x] likes
+* [x] give user firstName and lastName and use these to compute full_name using sqlDeps
 
 features
 

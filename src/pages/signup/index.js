@@ -14,9 +14,9 @@ const Signup = connect(null, { signup })(({ signup }) => {
       <div style={{ minWidth: 300, marginTop: 50 }}>
         <h5>Signup</h5>
         <SignupForm
-          onSubmit={({ email, password, first_name, last_name }) =>
+          onSubmit={({ email, password, firstName, lastName }) =>
             handleAjaxAction(
-              signup({ email, password, first_name, last_name })
+              signup({ email, password, firstName, lastName })
             ).catch(failureAction => {
               console.log(failureAction)
               throw new SubmissionError(

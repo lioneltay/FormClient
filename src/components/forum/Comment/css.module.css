@@ -1,4 +1,18 @@
 .comment {
   background: white;
-  padding: 15px 25px;
+  padding: 10px 5px 5px 10px;
+}
+
+.author {
+  font-size: 0.9rem;
+  color: navy;
+}
+
+.createdAt {
+  font-size: 0.9;
+  color: grey;
+}
+
+.content {
+  font-size: 1rem;
 }

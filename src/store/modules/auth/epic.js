@@ -10,12 +10,12 @@ import gql from "graphql-tag"
 import client from "services/graphql-client"
 
 const login = gql`
-  mutation Login($email: String, $password: String) {
+  mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       id
       email
-      first_name
-      last_name
+      firstName
+      lastName
       full_name
     }
   }
@@ -42,19 +42,19 @@ const signup = gql`
   mutation Signup(
     $email: String!
     $password: String!
-    $first_name: String!
-    $last_name: String!
+    $firstName: String!
+    $lastName: String!
   ) {
     signup(
       email: $email
       password: $password
-      first_name: $first_name
-      last_name: $last_name
+      firstName: $firstName
+      lastName: $lastName
     ) {
       id
       email
-      first_name
-      last_name
+      firstName
+      lastName
       full_name
     }
   }
@@ -63,12 +63,12 @@ const signup = gql`
 const signupEpic = action$ =>
   action$
     .ofType(SIGNUP.REQUEST)
-    .switchMap(({ payload: { email, password, first_name, last_name } }) =>
+    .switchMap(({ payload: { email, password, firstName, lastName } }) =>
       Observable.fromPromise(
         client
           .mutate({
             mutation: signup,
-            variables: { first_name, last_name, email, password },
+            variables: { firstName, lastName, email, password },
           })
           .then(({ data: { signup: user } }) => {
             return { type: SIGNUP.SUCCESS, payload: { user } }
@@ -101,8 +101,8 @@ const currentUser = gql`
     currentUser {
       id
       email
-      first_name
-      last_name
+      firstName
+      lastName
       full_name
     }
   }

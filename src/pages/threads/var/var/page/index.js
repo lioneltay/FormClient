@@ -8,6 +8,7 @@ const threadQuery = gql`
   query ThreadQuery($id: ID) {
     thread(id: $id) {
       id
+      createdAt
       title
       content
       author {
@@ -16,11 +17,6 @@ const threadQuery = gql`
       }
       rootComments {
         id
-        content
-        author {
-          id
-          full_name
-        }
       }
     }
   }
@@ -45,12 +41,7 @@ export default class ThreadInstancePage extends React.Component {
 
     return (
       <div>
-        <Thread
-          title={title}
-          content={content}
-          author={author}
-          rootComments={rootComments}
-        />
+        <Thread {...data.thread} />
 
         <div className="mt-2">
           <button onClick={() => history.push(`/threads/${id}/${title}/edit`)}>

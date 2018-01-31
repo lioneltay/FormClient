@@ -1,9 +1,16 @@
 import * as React from "react"
 import css from "./css.module.css"
+import moment from "moment"
 
-import { Comment } from "components/forum"
+import { CommentC } from "components/forum"
 
-const Thread = ({ id, title, content, author = {}, rootComments = [] }) => {
+const Thread = ({
+  createdAt,
+  title,
+  content,
+  author = {},
+  rootComments = [],
+}) => {
   return (
     <div>
       <div className={`mt-2 card ${css["thread-item"]}`}>
@@ -11,13 +18,16 @@ const Thread = ({ id, title, content, author = {}, rootComments = [] }) => {
           <strong>{title}</strong>
         </div>
         <div className={css.author}>
-          {author ? author.full_name : "anonymous"}
+          <span className="mr-2">
+            {(author && author.fullName) || "anonymous"}
+          </span>
+          <span className={css.createdAt}>{moment(createdAt).fromNow()}</span>
         </div>
         <div className={css.content}>{content}</div>
       </div>
 
-      {rootComments.map(({ id, content, author }) => (
-        <Comment key={id} content={content} author={author} />
+      {rootComments.map(comment => (
+        <CommentC key={comment.id} id={comment.id} />
       ))}
     </div>
   )

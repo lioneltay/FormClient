@@ -2,6 +2,7 @@ import * as React from "react"
 import css from "./css.module.css"
 import moment from "moment"
 
+import { CommentC } from "components/forum"
 import noop from "utils/noop"
 
 import { Display } from "components"
@@ -26,7 +27,11 @@ const Comment = ({
 
       <Display visible={!collapsed}>
         <div className={css.content}>{content}</div>
-        <div>{subComments}</div>
+        <div>
+          {subComments.map(comment => (
+            <CommentC key={comment.id} id={comment.id} />
+          ))}
+        </div>
       </Display>
     </div>
   )

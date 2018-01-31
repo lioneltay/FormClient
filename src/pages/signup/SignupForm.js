@@ -7,9 +7,9 @@ const SignupForm = reduxForm({ form: "SignupForm" })(
   ({ handleSubmit, className, style }) => {
     return (
       <form className={className} style={style} onSubmit={handleSubmit}>
-        <TextField name="first_name" label="First Name" validate={[required]} />
+        <TextField name="firstName" label="First Name" validate={[required]} />
 
-        <TextField name="last_name" label="Last Name" validate={[required]} />
+        <TextField name="lastName" label="Last Name" validate={[required]} />
 
         <TextField name="email" label="Email" validate={[required, email]} />
 
