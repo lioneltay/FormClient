@@ -7,7 +7,7 @@ import noop from "utils/noop"
 import { Display } from "components"
 
 const Comment = ({
-  createdAt,
+  created_at,
   content,
   subComments = [],
   author: { full_name } = {},
@@ -21,7 +21,7 @@ const Comment = ({
           [{collapsed ? "+" : "-"}]
         </span>
         <span className="mr-2">{full_name || "anonymous"}</span>
-        <span className={css.createdAt}>{moment(createdAt).fromNow()}</span>
+        <span className={css.created_at}>{moment(created_at).fromNow()}</span>
       </div>
 
       <Display visible={!collapsed}>

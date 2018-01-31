@@ -9,7 +9,7 @@ const commentQuery = gql`
   query CommentQuery($id: ID!) {
     comment(id: $id) {
       id
-      createdAt
+      created_at
       content
       author {
         id

@@ -8,7 +8,7 @@ const threadQuery = gql`
   query ThreadQuery($id: ID) {
     thread(id: $id) {
       id
-      createdAt
+      created_at
       title
       content
       author {

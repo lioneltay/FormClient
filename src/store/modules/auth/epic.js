@@ -14,8 +14,8 @@ const login = gql`
     login(email: $email, password: $password) {
       id
       email
-      firstName
-      lastName
+      first_name
+      last_name
       full_name
     }
   }
@@ -42,19 +42,19 @@ const signup = gql`
   mutation Signup(
     $email: String!
     $password: String!
-    $firstName: String!
-    $lastName: String!
+    $first_name: String!
+    $last_name: String!
   ) {
     signup(
       email: $email
       password: $password
-      firstName: $firstName
-      lastName: $lastName
+      first_name: $first_name
+      last_name: $last_name
     ) {
       id
       email
-      firstName
-      lastName
+      first_name
+      last_name
       full_name
     }
   }
@@ -63,12 +63,12 @@ const signup = gql`
 const signupEpic = action$ =>
   action$
     .ofType(SIGNUP.REQUEST)
-    .switchMap(({ payload: { email, password, firstName, lastName } }) =>
+    .switchMap(({ payload: { email, password, first_name, last_name } }) =>
       Observable.fromPromise(
         client
           .mutate({
             mutation: signup,
-            variables: { firstName, lastName, email, password },
+            variables: { first_name, last_name, email, password },
           })
           .then(({ data: { signup: user } }) => {
             return { type: SIGNUP.SUCCESS, payload: { user } }
@@ -101,8 +101,8 @@ const currentUser = gql`
     currentUser {
       id
       email
-      firstName
-      lastName
+      first_name
+      last_name
       full_name
     }
   }

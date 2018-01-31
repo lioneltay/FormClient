@@ -47,7 +47,7 @@ models
 
 * [x] relationships (follower/followee)
 * [x] likes
-* [x] give user firstName and lastName and use these to compute full_name using sqlDeps
+* [x] give user first_name and last_name and use these to compute full_name using sqlDeps
 
 features
 

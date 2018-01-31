@@ -11,9 +11,9 @@ export const getCurrentUser = () => {
   }
 }
 
-export const signup = ({ firstName, lastName, email, password }) => ({
+export const signup = ({ first_name, last_name, email, password }) => ({
   type: SIGNUP.REQUEST,
-  payload: { firstName, lastName, email, password },
+  payload: { first_name, last_name, email, password },
   meta: { actionStream: true },
 })
 

@@ -5,7 +5,7 @@ import moment from "moment"
 import { CommentC } from "components/forum"
 
 const Thread = ({
-  createdAt,
+  created_at,
   title,
   content,
   author = {},
@@ -19,9 +19,9 @@ const Thread = ({
         </div>
         <div className={css.author}>
           <span className="mr-2">
-            {(author && author.fullName) || "anonymous"}
+            {(author && author.full_name) || "anonymous"}
           </span>
-          <span className={css.createdAt}>{moment(createdAt).fromNow()}</span>
+          <span className={css.created_at}>{moment(created_at).fromNow()}</span>
         </div>
         <div className={css.content}>{content}</div>
       </div>

@@ -13,8 +13,8 @@ const loginEpic = action$ =>
   action$
     .ofType(LOGIN.SUCCESS, SIGNUP.SUCCESS)
     .map(action => {
-      const firstName = R.path(["payload", "user", "firstName"], action)
-      return `Hi, ${firstName}`
+      const first_name = R.path(["payload", "user", "first_name"], action)
+      return `Hi, ${first_name}`
     })
     .merge(action$.ofType(LOGOUT.SUCCESS).mapTo(`Logged out`))
     .map(message => openSnackbar({ message }))
